@@ -20,4 +20,7 @@
 
 ## Доступ
 shopify login --store refactor-test-2.myshopify.com
+
 shopify theme pull
+
+Password - stiepu
