@@ -17,3 +17,6 @@
    ```bash
    git clone https://github.com/Tarik7867/shopify-featured-products-test-task.git
    cd shopify-featured-products-test-task
+
+shopify login --store refactor-test-2.myshopify.com
+shopify theme pull
