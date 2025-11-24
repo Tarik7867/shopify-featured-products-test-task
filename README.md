@@ -23,4 +23,6 @@ shopify login --store refactor-test-2.myshopify.com
 
 shopify theme pull
 
+https://refactor-test-2.myshopify.com/
+
 Password - stiepu
