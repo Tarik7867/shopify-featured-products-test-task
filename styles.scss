@@ -1,0 +1,208 @@
+$color-background: #fafafa;
+$color-foreground: #262626;
+$color-card: #ffffff;
+$color-primary: #5b5fc7;
+$color-primary-hover: #4a4fb3;
+$color-border-selected: #22b8cf;
+$color-secondary-bg: #f5f5f5;
+$color-muted: #737373;
+
+$radius: 0.5rem;
+$transition-base: 0.2s ease;
+$transition-smooth: 0.3s ease;
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: @import url('https://fonts.googleapis.com/css2?family=Gothic+A1&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: $color-background;
+  color: $color-foreground;
+  line-height: 1.5;
+}
+
+//  BEM
+.featured-products {
+  width: 100%;
+  padding: 2rem 1rem;
+
+  @media (min-width: 768px) {
+    padding: 3rem 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 4rem 2rem;
+  }
+
+  // Container 
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  // Title 
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: $color-foreground;
+    text-align: center;
+    margin: 0 0 2rem;
+
+    @media (min-width: 768px) {
+      font-size: 1.875rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (min-width: 1024px) {
+      font-size: 2.25rem;
+      margin-bottom: 3.5rem;
+    }
+  }
+
+  // Grid 
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @media (min-width: 640px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      gap: 2rem;
+    }
+
+    @media (min-width: 1024px) {
+      gap: 2.5rem;
+    }
+  }
+}
+
+// Product Card Component - BEM
+.product-card {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-card;
+  border-radius: $radius;
+  overflow: hidden;
+  transition: transform $transition-base, box-shadow $transition-base;
+  border: 2px solid transparent;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    .product-card__image {
+      transform: scale(1.05);
+    }
+  }
+
+  // Selected state modifier
+  &--selected {
+    border-color: $color-border-selected;
+  }
+
+  // Image wrapper element
+  &__image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 75%; 
+    overflow: hidden;
+    background-color: $color-secondary-bg;
+  }
+
+  // Image element
+  &__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform $transition-smooth;
+  }
+
+  // Content container element
+  &__content {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @media (min-width: 768px) {
+      padding: 1.5rem;
+    }
+  }
+
+  // Title element
+  &__title {
+    font-size: 0.9375rem;
+    font-weight: 400;
+    color: $color-foreground;
+    text-align: center;
+
+    @media (min-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+
+  // Button element
+  &__button {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    background-color: $color-primary;
+    color: #ffffff;
+    border: none;
+    border-radius: calc($radius * 2);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color $transition-base, transform 0.1s ease;
+
+    &:hover {
+      background-color: $color-primary-hover;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-primary;
+      outline-offset: 2px;
+    }
+
+    @media (min-width: 768px) {
+      padding: 0.875rem 1.5rem;
+      font-size: 0.9375rem;
+    }
+  }
+}
+
+// Dark Mode Support
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a1a1a;
+    color: #fafafa;
+  }
+
+  .product-card {
+    background-color: #262626;
+    
+    &__image-wrapper {
+      background-color: #333333;
+    }
+    
+    &__title {
+      color: #fafafa;
+    }
+  }
+}

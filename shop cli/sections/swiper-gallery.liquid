@@ -1,0 +1,85 @@
+<div class="swiper mySwiper">
+  <div class="swiper-wrapper">
+    {% for image in product.images %}
+      <div class="swiper-slide bg-cover bg-center" style="background-image: url('{{ image | image_url: width: 200 }}'); min-height: 200px;">
+        <div class="text-white text-center p-8 bg-black/30">
+          {{ image.alt }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if section.settings.show_arrows %}
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  {% endif %}
+
+  {% if section.settings.show_pagination %}
+    <div class="swiper-pagination" style="position: absolute; z-index: 100;"></div>
+  {% endif %}
+</div>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var swiper = new Swiper(".mySwiper", {
+    slidesPerView: {{ section.settings.slides_per_view }},
+    spaceBetween: {{ section.settings.space_between }},
+    navigation: {
+      nextEl: {{ section.settings.show_arrows | json }} ? ".swiper-button-next" : null,
+      prevEl: {{ section.settings.show_arrows | json }} ? ".swiper-button-prev" : null,
+    },
+    pagination: {{ section.settings.show_pagination | json }} ? {
+      el: '.swiper-pagination',
+      clickable: true,
+    } : null,
+  });
+});
+</script>
+
+
+{% schema %}
+{
+  "name": "Swiper Gallery",
+  "settings": [
+    {
+      "type": "range",
+      "id": "slides_per_view",
+      "label": "Кількість слайдів на екрані",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Показати стрілки навігації",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pagination",
+      "label": "Показати пагінацію",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "space_between",
+      "label": "Відступ між слайдами (px)",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "default": 10
+    }
+  ],
+  "presets": [
+    {
+      "name": "Swiper Gallery",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
